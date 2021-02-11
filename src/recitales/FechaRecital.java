@@ -13,6 +13,11 @@ public class FechaRecital {
     private String ciudad;
     private int dia;
 
+    public FechaRecital(String ciudad, int dia) {
+        this.ciudad = ciudad;
+        this.dia = dia;
+    }
+
     public String getCiudad() {
         return ciudad;
     }

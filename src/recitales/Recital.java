@@ -7,24 +7,25 @@ package recitales;
 
 /**
  *
- * @author juanf
+ * @author ayean
  */
 public abstract class Recital {
+    public String nombreBanda;
+    public String[] listaTemas;
+    public int dimL;
+    public int cantTemas;
+    public int temasTocados;
 
-    private String nombreBanda;
-    private String [] listaTemas;
-    private int temas;
-    private int actual;
-
-    public Recital(String nombreBanda, int cantidadTemas) {
+    public Recital(String nombreBanda, int cantTemas) {
         this.nombreBanda = nombreBanda;
-        this.temas = cantidadTemas;
-        this.actual = 0;
-        listaTemas = new String[this.temas];
-        for (int i = 0; i < this.temas; ++i)
+        this.cantTemas = cantTemas;
+	this.dimL = 0;
+        this.temasTocados = 0;
+        listaTemas = new String[cantTemas];
+        for (int i=0; i<cantTemas; i++)
             listaTemas[i] = new String();
     }
-    
+
     public String getNombreBanda() {
         return nombreBanda;
     }
@@ -33,35 +34,36 @@ public abstract class Recital {
         this.nombreBanda = nombreBanda;
     }
 
-    public int getTemas() {
-        return temas;
+    public int getCantTemas() {
+        return cantTemas;
     }
 
-    public void setTemas(int temas) {
-        this.temas = temas;
-    }
-    
-    public void agregarTema(String nombreTema){
-        if (actual < temas){
-            listaTemas[actual++] = nombreTema;
-        }
+    public void setCantTemas(int cantTemas) {
+        this.cantTemas = cantTemas;
     }
 
-    public int getActual() {
-        return actual;
+    public int getTemasTocados() {
+        return temasTocados;
     }
 
-    public void setActual(int actual) {
-        this.actual = actual;
+    public void setTemasTocados(int temasTocados) {
+        this.temasTocados = temasTocados;
     }
     
     
-    
-    public void actuar(){
-        for (int i = 0; i < actual; ++i)
-            System.out.println("Y ahora tocaremos " + listaTemas[i]);
+    public void agregarTema (String tema){
+        listaTemas[dimL++] = tema;
     }
     
+    public String actuarRecital(){
+        String aux = "";
+        if (this.temasTocados < dimL){
+            aux = "y ahora tocaremos " + listaTemas[temasTocados++] + "\n" + actuarRecital();
+        } else
+            this.temasTocados = 0;
+        return "";
+    }
+
     public abstract boolean finalizado();
     public abstract int calcularCosto();
 }

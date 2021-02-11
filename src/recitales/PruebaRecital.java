@@ -22,7 +22,6 @@ public class PruebaRecital {
         int motivo;
         String nombreBanda;
         String auxTema;
-        String [] temas = new String[20];
         int cantidadTemas;
         
         String nombreGira;
@@ -40,7 +39,7 @@ public class PruebaRecital {
         System.out.print("Introduzca el nombre de la banda: ");
         nombreBanda = Lector.leerString();
         
-        recitalongoOcasional = new EventoOcasional(nombreBanda, 20, motivo, nombreContratante);
+        recitalongoOcasional = new EventoOcasional(nombreBanda, 20, motivo, nombreContratante, dia);
         
         cantidadTemas = 0;
         System.out.print("Introduzca el nombre del tema ('zzz' para terminar): ");
@@ -54,7 +53,7 @@ public class PruebaRecital {
         
         int costoEvento = recitalongoOcasional.calcularCosto();
         System.out.println("El costo del evento es de: "+costoEvento);
-        recitalongoOcasional.actuar();
+        System.out.println(recitalongoOcasional.actuar());
         
         System.out.println("Introduzca el nombre de la gira: ");
         nombreGira = Lector.leerString();
@@ -87,7 +86,7 @@ public class PruebaRecital {
         
         int costoTotal = recitalongoGira.calcularCosto();
         System.out.println("El costo de la gira es de: " + costoTotal);
-        recitalongoGira.actuar();
+        System.out.println(recitalongoGira.actuar());
         
 
     }

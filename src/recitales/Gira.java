@@ -7,30 +7,26 @@ package recitales;
 
 /**
  *
- * @author juanf
+ * @author ayean
  */
 public class Gira extends Recital{
     private String nombreGira;
-    private FechaRecital [] listaFechas;
-    private int fechas,dimL,actual;
+    private int cantFechas;
+    private FechaRecital[] fechas;
+    private int dimF;
+    private int actual;
 
-    public Gira(String nombreBanda, int cantidadTemas, 
-            String nombreGira, int cantidadFechas) {
-        super(nombreBanda, cantidadTemas);
+    public Gira(String nombreBanda, int cantTemas, String nombreGira,int cantFechas) {
+        super(nombreBanda, cantTemas);
         this.nombreGira = nombreGira;
-        this.fechas = cantidadFechas;
-        this.dimL = 0;
-        this.actual = 0;
-        listaFechas = new FechaRecital[this.fechas];        
-        
-        for (int i = 0; i < this.fechas; ++i)
-            listaFechas[i] = new FechaRecital();
+        this.cantFechas = cantFechas;
+        this.dimF = 0;
+	this.actual = 0;
+        fechas = new FechaRecital[cantFechas];
+        for (int i=0; i<cantFechas; i++)
+            fechas[i] = null;
     }
 
-    
-    
-    
-    
     public String getNombreGira() {
         return nombreGira;
     }
@@ -39,60 +35,27 @@ public class Gira extends Recital{
         this.nombreGira = nombreGira;
     }
 
-    public int getFechas() {
-        return fechas;
-    }
-
-    public void setFechas(int fechas) {
-        this.fechas = fechas;
-    }
-
-    public int getDimL() {
-        return dimL;
-    }
-
-    public void setDimL(int dimL) {
-        this.dimL = dimL;
-    }
-
-    
-    
-
-
-    public int getActual() {
-        return actual;
-    }
-
-    public void setActual(int actual) {
-        this.actual = actual;
+    public int getCantFechas() {
+        return cantFechas;
     }
     
-    public void agregarFecha(String nombreCiudad, int dia){
-        if (dimL < fechas){
-            FechaRecital aux = new FechaRecital();
-            aux.setCiudad(nombreCiudad);
-            aux.setDia(dia);
-            listaFechas[dimL++] = aux;
-        }
+    public void agregarFecha (String ciudad, int dia){
+        FechaRecital F = new FechaRecital(ciudad,dia);
+        fechas[dimF++] = F;
     }
     
-    public void actuar(){
-        if (!finalizado()){
-            System.out.println("Buenas noches " + 
-                    listaFechas[actual++].getCiudad());
-            super.actuar();
-            this.actuar();
-        }
+    public String actuar (){
+        return !finalizado() ?  "Buenas noches " + 
+                fechas[actual++].getCiudad() + "\n" + 
+                this.actuarRecital() + actuar() : "";
     }
     
-    public boolean finalizado(){
-        return this.getDimL() == this.getActual() ? true : false;
+    public boolean finalizado (){
+        return (this.actual == this.dimF);
     }
     
-    public int calcularCosto(){
-        int aux = 0;
-        for (int i = 0; i < dimL; ++i)
-            aux += 3000;
-        return aux;
+    public int calcularCosto (){
+        return (this.getCantFechas() * 30000);
     }
+    
 }
